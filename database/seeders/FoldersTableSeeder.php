@@ -1,8 +1,11 @@
 <?php
 
-use Carbon\Carbon;
+namespace Database\Seeders;
+
+use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class FoldersTableSeeder extends Seeder
 {
@@ -13,11 +16,13 @@ class FoldersTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = User::first(); // 既存の最初のユーザーを取得
         $titles = ['プライベート', '仕事', '旅行'];
 
         foreach ($titles as $title) {
-            DB::table('folders')->insert([
+            Folder::create([
                 'title' => $title,
+                'user_id' => $user->id, // ★
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

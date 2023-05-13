@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Controllers\TaskController;
 
 class CreateTask extends FormRequest
 {
@@ -29,7 +30,6 @@ class CreateTask extends FormRequest
         ];
     }
 
-
     public function attributes()
     {
         return [
@@ -40,10 +40,8 @@ class CreateTask extends FormRequest
 
     public function messages()
     {
-        return [
-            // キーでメッセージが表示されるべきルールを指定する。
-            // ドット区切りで左側が項目、右側がルールを意味する。
-            'due_date.after_or_equal' => ':attribute には今日以降の日付を入力してください。',
-        ];
-    }
+    return [
+        'due_date.after_or_equal' => ':attribute には今日以降の日付を入力してください。',
+    ];
+}
 }

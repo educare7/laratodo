@@ -1,32 +1,40 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
-	<div class="container">
-		<div class="row">
-			<div class="col col-md-offset-3 col-md-6">
-				<nav class="panel panel-default">
-					<div class="panel-heading">フォルダを追加する</div>
-					<div class="panel-body">
-						@if($errors->any())
-						<div class="alert alert-danger">
-							@foreach($errors->all() as $message)
-								<p>{{ $message }}</p>
-							@endforeach
-						</div>
-						@endif
-						<form action="{{ route('folders.create') }}" method="post">
-							@csrf
-							<div class="form-group">
-								<label for="title">フォルダ名</label>
-								<input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" />
-							</div>
-							<div class="text-right">
-								<button type="submit" class="btn btn-primary">送信</button>
-							</div>
-						</form>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('フォルダを追加') }}</div>
+
+                <div class="card-body">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach($errors->all() as $message)
+                          <li>{{ $message }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
+                    <form method="POST" action="{{ route('folders.create') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-4 col-form-label">{{ __('フォルダ名') }}</label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="title" id = "title"　value="{{ old('title') }}" />
+                            </div>
+                        </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-primary me-md-2" type="submit">{{ '送信' }}</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

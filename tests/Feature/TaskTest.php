@@ -6,7 +6,6 @@ use App\Http\Requests\CreateTask;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 
 class TaskTest extends TestCase
 {
@@ -16,7 +15,7 @@ class TaskTest extends TestCase
     /**
      * 各テストメソッドの実行前に呼ばれる
      */
-    public function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -57,21 +56,21 @@ class TaskTest extends TestCase
     }
 
     /**
-     * 状態が定義された値ではない場合はバリデーションエラー
-     * @test
-     */
-    public function status_should_be_within_defined_numbers()
-    {
-        $this->seed('TasksTableSeeder');
+  * 状態が定義された値ではない場合はバリデーションエラー
+  * @test
+  */
+public function status_should_be_within_defined_numbers()
+{
+    $this->seed('TasksTableSeeder');
 
-        $response = $this->post('/folders/1/tasks/1/edit', [
-            'title' => 'Sample task',
-            'due_date' => Carbon::today()->format('Y/m/d'),
-            'status' => 999,
-        ]);
+    $response = $this->post('/folders/1/tasks/1/edit', [
+        'title' => 'Sample task',
+        'due_date' => Carbon::today()->format('Y/m/d'),
+        'status' => 999,
+    ]);
 
-        $response->assertSessionHasErrors([
-            'status' => '状態 には 未着手、着手中、完了 のいずれかを指定してください。',
-        ]);
-    }
+    $response->assertSessionHasErrors([
+        'status' => '状態 には 未着手、着手中、完了 のいずれかを指定してください。',
+    ]);
+}
 }

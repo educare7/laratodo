@@ -10,7 +10,7 @@ class FolderPolicy
 {
     use HandlesAuthorization;
 
-    /**
+     /**
      * フォルダの閲覧権限
      * @param User $user
      * @param Folder $folder

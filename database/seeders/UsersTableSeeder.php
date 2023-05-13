@@ -1,10 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
-use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,14 +12,12 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'test',
-            'email' => 'dummy@email.com',
-            'password' => bcrypt('pass1234'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+        User::create([
+            'name' =>'test',
+            'email' =>'test@example.com',
+            'password'=>Hash::make('password'),
         ]);
     }
 }

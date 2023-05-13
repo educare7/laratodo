@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
+use App\Models\Task;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class TasksTableSeeder extends Seeder
 {
@@ -16,14 +16,16 @@ class TasksTableSeeder extends Seeder
     public function run()
     {
         foreach (range(1, 3) as $num) {
-            DB::table('tasks')->insert([
+            Task::create([
                 'folder_id' => 1,
                 'title' => "サンプルタスク {$num}",
                 'status' => $num,
-                'due_date' => Carbon::now()->addDay($num),
+                'due_date' => Carbon::now()->addDays($num),
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
             ]);
         }
     }
+    
 }
+

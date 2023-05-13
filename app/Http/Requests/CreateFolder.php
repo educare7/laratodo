@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Controllers\FolderController;
 
 class CreateFolder extends FormRequest
 {
@@ -24,6 +25,7 @@ class CreateFolder extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'required', // ★
             'title' => 'required|max:20',
         ];
     }
