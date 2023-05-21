@@ -179,16 +179,26 @@ class Base
     /**
      * Returns randomly ordered subsequence of $count elements from a provided array
      *
+<<<<<<< HEAD
      * @param array $array           Array to take elements from. Defaults to a-c
      * @param int   $count           Number of elements to take.
      * @param bool  $allowDuplicates Allow elements to be picked several times. Defaults to false
      *
      * @throws \LengthException When requesting more elements than provided
+=======
+     * @param array|class-string|\Traversable $array           Array to take elements from. Defaults to a-c
+     * @param int                             $count           Number of elements to take.
+     * @param bool                            $allowDuplicates Allow elements to be picked several times. Defaults to false
+     *
+     * @throws \InvalidArgumentException
+     * @throws \LengthException          When requesting more elements than provided
+>>>>>>> badafb049d4cdd057d441fc9f1644f7305e5e91d
      *
      * @return array New array with $count elements from $array
      */
     public static function randomElements($array = ['a', 'b', 'c'], $count = 1, $allowDuplicates = false)
     {
+<<<<<<< HEAD
         $traversables = [];
 
         if ($array instanceof \Traversable) {
@@ -225,11 +235,69 @@ class Base
         }
 
         return $elements;
+=======
+        $elements = $array;
+
+        if (is_string($array) && function_exists('enum_exists') && enum_exists($array)) {
+            $elements = $array::cases();
+        }
+
+        if ($array instanceof \Traversable) {
+            $elements = \iterator_to_array($array, false);
+        }
+
+        if (!is_array($elements)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument for parameter $array needs to be array, an instance of %s, or an instance of %s, got %s instead.',
+                \UnitEnum::class,
+                \Traversable::class,
+                is_object($array) ? get_class($array) : gettype($array),
+            ));
+        }
+
+        $numberOfElements = count($elements);
+
+        if (!$allowDuplicates && $numberOfElements < $count) {
+            throw new \LengthException(sprintf(
+                'Cannot get %d elements, only %d in array',
+                $count,
+                $numberOfElements,
+            ));
+        }
+
+        $randomElements = [];
+
+        $keys = array_keys($elements);
+        $maxIndex = $numberOfElements - 1;
+        $elementHasBeenSelectedAlready = [];
+        $numberOfRandomElements = 0;
+
+        while ($numberOfRandomElements < $count) {
+            $index = mt_rand(0, $maxIndex);
+
+            if (!$allowDuplicates) {
+                if (isset($elementHasBeenSelectedAlready[$index])) {
+                    continue;
+                }
+
+                $elementHasBeenSelectedAlready[$index] = true;
+            }
+
+            $key = $keys[$index];
+
+            $randomElements[] = $elements[$key];
+
+            ++$numberOfRandomElements;
+        }
+
+        return $randomElements;
+>>>>>>> badafb049d4cdd057d441fc9f1644f7305e5e91d
     }
 
     /**
      * Returns a random element from a passed array
      *
+<<<<<<< HEAD
      * @param array $array
      */
     public static function randomElement($array = ['a', 'b', 'c'])
@@ -240,6 +308,40 @@ class Base
         $elements = static::randomElements($array, 1);
 
         return $elements[0];
+=======
+     * @param array|class-string|\Traversable $array
+     *
+     * @throws \InvalidArgumentException
+     */
+    public static function randomElement($array = ['a', 'b', 'c'])
+    {
+        $elements = $array;
+
+        if (is_string($array) && function_exists('enum_exists') && enum_exists($array)) {
+            $elements = $array::cases();
+        }
+
+        if ($array instanceof \Traversable) {
+            $elements = iterator_to_array($array, false);
+        }
+
+        if ($elements === []) {
+            return null;
+        }
+
+        if (!is_array($elements)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Argument for parameter $array needs to be array, an instance of %s, or an instance of %s, got %s instead.',
+                \UnitEnum::class,
+                \Traversable::class,
+                is_object($array) ? get_class($array) : gettype($array),
+            ));
+        }
+
+        $randomElements = static::randomElements($elements, 1);
+
+        return $randomElements[0];
+>>>>>>> badafb049d4cdd057d441fc9f1644f7305e5e91d
     }
 
     /**

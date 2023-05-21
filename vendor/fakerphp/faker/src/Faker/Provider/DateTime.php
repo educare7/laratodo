@@ -334,9 +334,21 @@ class DateTime extends Base
      *
      * @example 'Europe/Paris'
      */
+<<<<<<< HEAD
     public static function timezone()
     {
         return static::randomElement(\DateTimeZone::listIdentifiers());
+=======
+    public static function timezone(string $countryCode = null)
+    {
+        if ($countryCode) {
+            $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $countryCode);
+        } else {
+            $timezones = \DateTimeZone::listIdentifiers();
+        }
+
+        return static::randomElement($timezones);
+>>>>>>> badafb049d4cdd057d441fc9f1644f7305e5e91d
     }
 
     /**

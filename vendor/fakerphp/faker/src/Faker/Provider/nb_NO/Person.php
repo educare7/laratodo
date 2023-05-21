@@ -134,7 +134,11 @@ class Person extends \Faker\Provider\Person
         'Abdirahim', 'Abdirahman', 'Abdirashid', 'Abdirizak', 'Abdul', 'Abdulahi', 'Abdulkadir', 'Abdullah',
         'Abdullahi', 'Abdulqadir', 'Abdurahman', 'Abed', 'Abel', 'Abid', 'Abraham', 'Absalon', 'Abu', 'Abubakar',
         'Adam', 'Adan', 'Adeel', 'Adelheid', 'Adelsten', 'Adem', 'Aden', 'Adham', 'Adi', 'Adil', 'Adis', 'Adler',
+<<<<<<< HEAD
         'Admir', 'Adnan', 'Adolf', 'Adrian', 'Afanasi', 'Afrim', 'Afshin', 'Agim', 'Agmund', 'Agnar', 'Agvald', 'Ahmad',
+=======
+        'Admir', 'Adnan', 'Adrian', 'Afanasi', 'Afrim', 'Afshin', 'Agim', 'Agmund', 'Agnar', 'Agvald', 'Ahmad',
+>>>>>>> badafb049d4cdd057d441fc9f1644f7305e5e91d
         'Ahmed', 'Aiden', 'Ailo', 'Aimar', 'Aime', 'Ajdin', 'Ajmal', 'Akam', 'Akbar', 'Akram', 'Aksel', 'Alain', 'Alan',
         'Alban', 'Albert', 'Alberto', 'Albin', 'Albrecht', 'Alejandro', 'Aleksander', 'Alen', 'Alessandro', 'Alex',
         'Alexander', 'Alexsander', 'Alf', 'Alfred', 'Algirdas', 'Algot', 'Ali', 'Allan', 'Almar', 'Almas', 'Almaz',
